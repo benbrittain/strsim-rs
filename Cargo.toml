@@ -16,3 +16,6 @@ repository = "https://github.com/rapidfuzz/strsim-rs"
 documentation = "https://docs.rs/strsim/"
 exclude = ["/.github", "/dev"]
 categories = ["text-processing"]
+
+[dependencies]
+hashbrown = "0.15.3"

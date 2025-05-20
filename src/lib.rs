@@ -18,16 +18,24 @@
     // todo https://github.com/rapidfuzz/strsim-rs/issues/59
     clippy::range_plus_one
 )]
+#![no_std]
 
-use std::char;
-use std::cmp::{max, min};
-use std::collections::HashMap;
-use std::convert::TryFrom;
-use std::error::Error;
-use std::fmt::{self, Display, Formatter};
-use std::hash::Hash;
-use std::mem;
-use std::str::Chars;
+#[macro_use]
+extern crate alloc;
+
+use alloc::string::String;
+use alloc::vec::Vec;
+use core::char;
+use core::clone::Clone;
+use core::cmp::{max, min};
+use core::convert::TryFrom;
+use core::error::Error;
+use core::fmt::{self, Display, Formatter};
+use core::hash::Hash;
+use core::iter::Iterator;
+use core::mem;
+use core::str::Chars;
+use hashbrown::HashMap;
 
 #[derive(Debug, PartialEq)]
 pub enum StrSimError {
@@ -540,7 +548,7 @@ where
         self.fill = self.used;
         self.mask = new_size - 1;
 
-        let old_map = std::mem::replace(
+        let old_map = core::mem::replace(
             self.map
                 .as_mut()
                 .expect("callers have to ensure map is allocated"),
